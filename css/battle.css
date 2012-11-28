@@ -1,0 +1,109 @@
+#screen {
+    position: relative;
+    width: 320px;
+    height: 480px;
+    color: #CDAC39;
+    background-color: #2D1A1F;
+    overflow: hidden;
+}
+.status {
+    position: absolute;
+    width: 100%;
+    line-height: 24px;
+    height: 24px;
+    font-size: 16px;
+    background-color: #2D0918;
+}
+.status .name {
+    color: #A9376F;
+}
+.status .power-label,
+.status .power {
+    color: #E7C06F;
+}
+.enemy .status {
+    top: 0;
+    border-bottom: solid 1px #8B582F;
+    text-align: left;
+}
+.self .status {
+    bottom: 0;
+    border-top: solid 1px #8B582F;
+    text-align: right;
+}
+.cards {
+    position: absolute;
+    width: 320px;
+    overflow: hidden;
+    text-align: center;
+}
+.enemy .cards {
+    top: 26px;
+    padding-bottom: 20px;
+}
+.self .cards {
+    bottom: 26px;
+    padding-top: 20px;
+}
+.card {
+    display: inline-block;
+    width: 60px;
+    height: 180px;
+    background-color: #153580;
+    -webkit-transition: all .5s cubic-bezier(0,1.2,1,1.1);
+}
+.card:nth-child(1) {
+    -webkit-transition-delay: 0.1s;
+}
+.card:nth-child(2) {
+    -webkit-transition-delay: 0.2s;
+}
+.card:nth-child(3) {
+    -webkit-transition-delay: 0.3s;
+}
+.card:nth-child(4) {
+    -webkit-transition-delay: 0.4s;
+}
+.card:nth-child(5) {
+    -webkit-transition-delay: 0.5s;
+}
+.enemy .card.hidden {
+    -webkit-transform: translate3d(0,-180px,0);
+}
+.self .card.hidden {
+    -webkit-transform: translate3d(0,180px,0);
+}
+.card img {
+    width: 60px;
+    height: 180px;
+}
+.card.no-effect {
+    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.3)), to(rgba(0,0,0,0.3)))
+}
+.card.effect {
+    -webkit-transform: scale3d(1.1,1.1,1);
+}
+#title,
+#title-bg {
+    position: absolute;
+    top: 225px;
+    width: 320px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 5px;
+    -webkit-transition: all 0.5s ease;
+    opacity: 1;
+}
+#title.hidden {
+    -webkit-transform: scale3d(4,4,1);
+    opacity: 0;
+}
+#title-bg {
+    background: -webkit-gradient(linear, left top, left bottom, from(#2D1A1F), color-stop(0.5, #851C1D), to(#2D1A1F));
+}
+#title-bg.hidden {
+    -webkit-transform: scale3d(1.5,1.5,1);
+    opacity: 0;
+}
