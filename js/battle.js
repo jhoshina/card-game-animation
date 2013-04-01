@@ -1,27 +1,38 @@
 (function($, window) {
 
-$(window).load(function() {
-	$('.card:last')
-		.one('webkitTransitionEnd', function() {
-			$('#title')
-				.one('webkitTransitionEnd', function() {
-					$('#title-bg')
-						.one('webkitTransitionEnd', function() {
-							setTimeout(function() {
-								$('.card').css({'-webkti-mask-image': 'rgb(0,0,0,0.7)'});
-							}, 1000);
-						})
-						.removeClass('hidden')
-					;
-				})
-				.removeClass('hidden')
-			;
-		});
-	$('.card')
-		.on('webkitTransitionEnd', function(event) {
-			event.stopPropagation();
-		})
-		.removeClass('hidden');
-});
+  var raiseCard = function() {
+    var dfd = $.Deferred();
+    $('.card:last').one('webkitTransitionEnd', function() {
+      dfd.resolve();
+    });
+    $('.card').removeClass('hidden');
+    return dfd.promise();
+  };
 
-})(jQuery, window);
+  var awakeTitle = function() {
+    var dfd = $.Deferred();
+    $('#title').one('webkitTransitionEnd', function() {
+      dfd.resolve();
+    }).removeClass('hidden');
+    return dfd.promise();
+  };
+
+  var flashBackground = function() {
+    var dfd = $.Deferred();
+    $('#title-bg').one('webkitTransitionEnd', function() {
+      dfd.resolve();
+    }).removeClass('hidden');
+    return dfd.promise();
+  };
+
+  $(window).on('load', function() {
+    $.Deferred(function(dfd) {
+      dfd
+        .then(raiseCard)
+        .then(awakeTitle)
+        .then(flashBackground)
+      ;
+    }).resolve();
+  });
+
+})(jQuery, this);
